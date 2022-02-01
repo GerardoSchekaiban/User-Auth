@@ -1,3 +1,5 @@
+<?php require_once 'controllers/authController.php'; ?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -41,7 +43,7 @@
                           <input type="password" class="form-control" name="passwordConf">
                       </div>
                       
-                      <button type="submit" class="btn btn-primary w-100" name="signup">Sign up</button>
+                      <button type="submit" class="btn btn-primary w-100" name="signup-BTN">Sign up</button>
 
                       <p class="text-center mt-4">Already have an account? <a href="login.php">Sign In</a></p>
                   </form>
