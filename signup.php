@@ -22,28 +22,57 @@
               <div class="col-md-4 offset-md-4 form-div">
                   <form action="signup.php" method="post">
                       <h2 class="text-center">Sign Up</h2>
-
                       <div class="mb-3">
                           <label for="username" class="form-label">Username</label>
                           <input type="text" class="form-control" name="username">
-                      </div>
+                          <?php if(isset($errors['username'])) : ?>
+                              <div class="form-text text-danger">
+                                  <?php echo $errors['username']; ?>
+                              </div>
+                          <?php endif; ?>
+                        </div>
 
                       <div class="mb-3">
                           <label for="email" class="form-label">Email</label>
-                          <input type="email" class="form-control" name="email">
+                          <input type="text" class="form-control" name="email">
+                          <?php if(isset($errors['invalidEmail'])) : ?>
+                            <div class="form-text text-danger">
+                                  <?php echo $errors['invalidEmail']; ?>
+                            </div>
+                          <?php endif; ?>
+                          <?php if(isset($errors['emailExists'])) : ?>
+                            <div class="form-text text-danger">
+                                  <?php echo $errors['emailExists']; ?>
+                            </div>
+                          <?php endif; ?>
                       </div>
 
                       <div class="mb-3">
                           <label for="password" class="form-label">Password</label>
                           <input type="password" class="form-control" name="password">
+                          <?php if(isset($errors['password'])) : ?>
+                            <div class="form-text text-danger">
+                                  <?php echo $errors['password']; ?>
+                            </div>
+                          <?php endif; ?>
                       </div>
 
                       <div class="mb-3">
                           <label for="passwordConf" class="form-label">Confirm Password</label>
                           <input type="password" class="form-control" name="passwordConf">
+                          <?php if(isset($errors['passwordConf'])) : ?>
+                            <div class="form-text text-danger">
+                                  <?php echo $errors['passwordConf']; ?>
+                            </div>
+                          <?php endif; ?>
+                          <?php if(isset($errors['passwordMatch'])) : ?>
+                            <div id="emailHelp" class="form-text text-danger">
+                                  <?php echo $errors['passwordMatch']; ?>
+                            </div>
+                          <?php endif; ?>
                       </div>
                       
-                      <button type="submit" class="btn btn-primary w-100" name="signup-BTN">Sign up</button>
+                      <button type="submit" class="btn btn-primary w-100" name="signup">Sign up</button>
 
                       <p class="text-center mt-4">Already have an account? <a href="login.php">Sign In</a></p>
                   </form>

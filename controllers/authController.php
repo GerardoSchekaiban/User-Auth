@@ -3,9 +3,11 @@
 require 'config/db.php';
 
 $errors = array();
+$username = "";
+$email = "";
 
 //If user submit form
-if(isset($_POST['sign-up'])){
+if(isset($_POST['signup'])){
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -15,11 +17,8 @@ if(isset($_POST['sign-up'])){
     if(empty($username)){
         $errors['username'] = "Username required";
     }
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL) || empty($email)){
         $errors['invalidEmail'] = "Invalid email";
-    }
-    if(empty($email)){
-        $errors['email'] = "email required";
     }
     if(empty($password)){
         $errors['password'] = "Password required";
@@ -28,13 +27,14 @@ if(isset($_POST['sign-up'])){
         $errors['passwordConf'] = "Password Confirmation required";
     }
     if($password !== $passwordConf){
-        $errors['username'] = "Passwords do not match";
+        $errors['passwordMatch'] = "Passwords do not match";
     }
-    // Query
+
+    // Read query
     $emailQuery = "SELECT * FROM users WHERE email=? LIMIT 1";
 
     // Prepared statements
-    $stmt = $connection ->prepare($emailQuery);
+    $stmt = $connection -> prepare($emailQuery);
     $stmt->bind_param('s',$email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -44,8 +44,9 @@ if(isset($_POST['sign-up'])){
     if($userCount > 0){
         $errors['emailExists'] = "Email already exists";
     }
-
-    if(count($errors === 0)){
+    // If no errors
+    if(count($errors) === 0){
+        //Password
         $password = password_hash($password, PASSWORD_DEFAULT);
 
         // Insert Query
@@ -55,7 +56,8 @@ if(isset($_POST['sign-up'])){
 
         // Execute statement
         if($stmt->execute()){
-
+            //login user automatically
+            
         }else{
             $errors['db_error'] = "Database error: failed to register";
         };
