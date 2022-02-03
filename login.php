@@ -1,3 +1,5 @@
+<?php require_once 'controllers/authController.php'; ?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -32,7 +34,7 @@
                       
                       <button type="submit" class="btn btn-primary w-100" name="login">Log in</button>
 
-                      <p class="text-center mt-4">Don't have an account? <a href="login.php">Sign Up</a></p>
+                      <p class="text-center mt-4">Don't have an account? <a href="signup.php">Sign Up</a></p>
                   </form>
               </div>
           </div>

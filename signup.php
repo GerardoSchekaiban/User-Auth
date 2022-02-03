@@ -24,7 +24,7 @@
                       <h2 class="text-center">Sign Up</h2>
                       <div class="mb-3">
                           <label for="username" class="form-label">Username</label>
-                          <input type="text" class="form-control" name="username">
+                          <input type="text" class="form-control" name="username" value="<?php echo $username; ?>">
                           <?php if(isset($errors['username'])) : ?>
                               <div class="form-text text-danger">
                                   <?php echo $errors['username']; ?>
@@ -34,7 +34,7 @@
 
                       <div class="mb-3">
                           <label for="email" class="form-label">Email</label>
-                          <input type="text" class="form-control" name="email">
+                          <input type="text" class="form-control" name="email" value="<?php echo $email; ?>">
                           <?php if(isset($errors['invalidEmail'])) : ?>
                             <div class="form-text text-danger">
                                   <?php echo $errors['invalidEmail']; ?>
@@ -49,7 +49,7 @@
 
                       <div class="mb-3">
                           <label for="password" class="form-label">Password</label>
-                          <input type="password" class="form-control" name="password">
+                          <input type="password" class="form-control" name="password" value="<?php echo $password; ?>">
                           <?php if(isset($errors['password'])) : ?>
                             <div class="form-text text-danger">
                                   <?php echo $errors['password']; ?>
@@ -59,7 +59,7 @@
 
                       <div class="mb-3">
                           <label for="passwordConf" class="form-label">Confirm Password</label>
-                          <input type="password" class="form-control" name="passwordConf">
+                          <input type="password" class="form-control" name="passwordConf" value="<?php echo $passwordConf; ?>">
                           <?php if(isset($errors['passwordConf'])) : ?>
                             <div class="form-text text-danger">
                                   <?php echo $errors['passwordConf']; ?>

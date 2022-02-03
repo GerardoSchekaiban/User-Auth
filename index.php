@@ -1,3 +1,5 @@
+<?php require_once 'controllers/authController.php'; ?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -17,11 +19,16 @@
       <div class="container">
           <div class="row">
               <div class="col-md-4 offset-md-4 form-div">
-                  <div class="alert alert-success">
-                      You are now logged in
-                  </div>
-                  <h1>Welcome, Gerardo</h1>
-                  <a href="#" class="link-danger">Log Out</a>
+              <?php if(isset($_SESSION['message'])) : ?>
+                <div class="alert alert-success">
+                    <?php 
+                      echo $_SESSION['message'];
+                      unset($_SESSION['message']);
+                    ?>
+                </div>
+              <?php endif; ?>
+              <h1>Welcome, <?php echo $_SESSION['username']; ?></h1>
+              <a href="#" class="link-danger">Log Out</a>
               </div>
           </div>
       </div>

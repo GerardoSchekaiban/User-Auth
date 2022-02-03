@@ -1,10 +1,15 @@
 <?php
 
+session_start();
+
+//Database connection
 require 'config/db.php';
 
 $errors = array();
 $username = "";
 $email = "";
+$password = "";
+$passwordConf = "";
 
 //If user submit form
 if(isset($_POST['signup'])){
@@ -57,7 +62,12 @@ if(isset($_POST['signup'])){
         // Execute statement
         if($stmt->execute()){
             //login user automatically
-            
+            $user_id = $connection->insert_id;
+            $_SESSION['id'] = $user_id;
+            $_SESSION['username'] = $username;
+            $_SESSION['message'] = "You are now logged in!";
+            header('location: index.php');
+            exit();
         }else{
             $errors['db_error'] = "Database error: failed to register";
         };
