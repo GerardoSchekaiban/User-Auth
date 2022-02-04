@@ -22,14 +22,30 @@
                   <form action="login.php" method="post">
                       <h2 class="text-center">Log in</h2>
 
+                      <?php if(isset($errors['login_fail'])): ?>
+                        <div class="alert alert-danger">
+                            <?php echo $errors['login_fail']; ?>
+                        </div>
+                      <?php endif; ?>
+
                       <div class="mb-3">
                           <label for="username" class="form-label">Email or Username</label>
-                          <input type="text" class="form-control" name="username">
+                          <input type="text" class="form-control" name="username" value="<?php echo $username; ?>">
+                          <?php if(isset($errors['username'])) : ?>
+                              <div class="form-text text-danger">
+                                  <?php echo $errors['username']; ?>
+                              </div>
+                          <?php endif; ?>
                       </div>
 
                       <div class="mb-3">
                           <label for="password" class="form-label">Password</label>
-                          <input type="password" class="form-control" name="password">
+                          <input type="password" class="form-control" name="password" value="<?php echo $password; ?>">
+                          <?php if(isset($errors['password'])) : ?>
+                              <div class="form-text text-danger">
+                                  <?php echo $errors['password']; ?>
+                              </div>
+                          <?php endif; ?>
                       </div>
                       
                       <button type="submit" class="btn btn-primary w-100" name="login">Log in</button>
