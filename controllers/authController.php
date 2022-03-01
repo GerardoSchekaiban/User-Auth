@@ -116,3 +116,11 @@ if(isset($_POST['login'])){
     }
 }
 
+//Log out user
+if(isset($_GET['logout'])){
+    session_destroy();
+    unset($_SESSION['id']);
+    unset($_SESSION['username']);
+    header('Location: login.php');
+    exit();
+}

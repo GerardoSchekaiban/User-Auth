@@ -1,4 +1,11 @@
-<?php require_once 'controllers/authController.php'; ?>
+<?php 
+require_once 'controllers/authController.php';
+//Verify if user has a session started 
+if(!$_SESSION['id']){
+  header('Location: login.php');
+  exit();
+}
+?>
 
 <!doctype html>
 <html lang="en">
@@ -28,7 +35,7 @@
                 </div>
               <?php endif; ?>
               <h1>Welcome, <?php echo $_SESSION['username']; ?></h1>
-              <a href="#" class="link-danger">Log Out</a>
+              <a href="index.php?logout=1" class="link-danger">Log Out</a>
               </div>
           </div>
       </div>
