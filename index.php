@@ -36,6 +36,19 @@ if(!$_SESSION['id']){
               <?php endif; ?>
               <h1>Welcome, <?php echo $_SESSION['username']; ?></h1>
               <a href="index.php?logout=1" class="link-danger">Log Out</a>
+
+              <?php if(!$_SESSION['verified']): ?>
+              <div class="alert alert-warning">
+                  You need to verify your account.
+                  Sign in to your email account and click on the
+                  verification link we just emailed you at
+                  <strong><?php echo $_SESSION['email'] ?></strong>
+              </div>
+              <?php endif ?>
+
+              <?php if($_SESSION['verified']): ?>
+              <button class="btn btn-lg btn-primary">I am verified</button>
+              <?php endif ?>
               </div>
           </div>
       </div>

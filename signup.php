@@ -49,7 +49,7 @@
 
                       <div class="mb-3">
                           <label for="password" class="form-label">Password</label>
-                          <input type="text" class="form-control" name="password" value="<?php echo $password; ?>">
+                          <input type="password" class="form-control" name="password" value="<?php echo $password; ?>">
                           <?php if(isset($errors['password'])) : ?>
                             <div class="form-text text-danger">
                                   <?php echo $errors['password']; ?>

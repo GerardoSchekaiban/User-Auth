@@ -53,11 +53,13 @@ if(isset($_POST['signup'])){
     if(count($errors) === 0){
         //Password
         $password = password_hash($password, PASSWORD_DEFAULT);
+        $token = bin2hex(random_bytes(50));
+        $verified = false;
 
         // Insert Query
-        $sql = "INSERT into users (username, email, password) VALUES (?, ?, ?)";
+        $sql = "INSERT into users (username, email, password, verified, token) VALUES (?, ?, ?, ?, ?)";
         $stmt = $connection ->prepare($sql);
-        $stmt->bind_param('sss',$username, $email, $password);
+        $stmt->bind_param('sssbs',$username, $email, $password, $verified, $token);
 
         // Execute statement
         if($stmt->execute()){
@@ -65,7 +67,11 @@ if(isset($_POST['signup'])){
             $user_id = $connection->insert_id;
             $_SESSION['id'] = $user_id;
             $_SESSION['username'] = $username;
+            $_SESSION['email'] = $email;
+            $_SESSION['verified'] = $verified;
+            //flash message
             $_SESSION['message'] = "You are now logged in!";
+            //redirect
             header('location: index.php');
             exit();
         }else{
@@ -104,6 +110,8 @@ if(isset($_POST['login'])){
             if(password_verify($password, $user['password'])){
                 $_SESSION['id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
+                $_SESSION['email'] = $user['email'];
+                $_SESSION['verified'] = $user['verified'];
                 $_SESSION['message'] = "You are now logged in!";
                 header('location: index.php');
                 exit();
