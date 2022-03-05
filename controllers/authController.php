@@ -4,6 +4,7 @@ session_start();
 
 //Database connection
 require 'config/db.php';
+require_once 'emailController.php';
 
 $errors = array();
 $username = "";
@@ -69,6 +70,9 @@ if(isset($_POST['signup'])){
             $_SESSION['username'] = $username;
             $_SESSION['email'] = $email;
             $_SESSION['verified'] = $verified;
+
+            sendVerificationEmail($email, $token);
+
             //flash message
             $_SESSION['message'] = "You are now logged in!";
             //redirect
