@@ -136,3 +136,28 @@ if(isset($_GET['logout'])){
     header('Location: login.php');
     exit();
 }
+
+//Verify user by token
+function verifyUser($token){
+
+    global $connection;
+    $query = "SELECT * FROM users WHERE token = '$token' LIMIT 1 ";
+    $result = mysqli_query($connection, $query);
+
+    if(mysqli_num_rows($result) > 0){
+        $user = mysqli_fetch_assoc($result);
+        $update_query = "UPDATE users SET verified = 1 WHERE token = '$token'";
+
+        if(mysqli_query($connection, $update_query)){
+            $_SESSION['id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['verified'] = 1;
+            $_SESSION['message'] = "Your email addesss was successfully verified";
+            header('location: index.php');
+            exit();
+        }
+    }else{
+        echo 'User not found';
+    }
+}

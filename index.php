@@ -1,5 +1,12 @@
 <?php 
 require_once 'controllers/authController.php';
+
+//Verify if token has been recieved in url
+if(isset($_GET['token'])){
+  $token = $_GET['token'];
+  verifyUser($token);
+}
+
 //Verify if user has a session started 
 if(!$_SESSION['id']){
   header('Location: login.php');

@@ -18,21 +18,9 @@ function sendVerificationEmail($userEmail, $token){
 
   global $mailer;
   
-  $body = '<!DOCTYPE html>
-  <html lang="en">
-  <head>
-      <meta charset="UTF-8">
-      <title>Verify email</title>
-  </head>
-  <body>
-      <div class="warapper">
-          <p>
-              Thank you for signing up on our website. Please click on the link below to verify your email.
-          </p>
-          <a href="http://localhost/userAuthPhp/index.php?token=' .$token . '">Verify your email adress</a>
-      </div>
-  </body>
-  </html>';
+  $body = 'Thank you for signing up on our website. Please click on the link below to verify your email.
+  
+  http://localhost/userAuthPhp/index.php?token=' . $token;
 
   // Create a message
   $message = (new Swift_Message('Verify your email address'))
